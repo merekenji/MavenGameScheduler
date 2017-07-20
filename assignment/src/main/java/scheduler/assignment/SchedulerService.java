@@ -81,9 +81,8 @@ public class SchedulerService implements ISchedulerService {
 		return dayRepo.save(d);
 	}
 
-	public StringBuffer gameWiseReport(String gameName) { // method to generate
-															// game wise report
-		StringBuffer sb = new StringBuffer();
+	public StringBuilder gameWiseReport(String gameName) { // method to generate game wise report
+		StringBuilder sb = new StringBuilder();
 		if ("".equals(gameName)) { // check if game name is empty
 			return sb.append("Error: Game name should not be empty");
 		} else {
@@ -112,7 +111,7 @@ public class SchedulerService implements ISchedulerService {
 					}
 				}
 				if (count == 0) { // if game does not have any players
-					return new StringBuffer("Error: Game does not have any players");
+					return new StringBuilder("Error: Game does not have any players");
 				}
 
 				count = 0;
@@ -132,18 +131,18 @@ public class SchedulerService implements ISchedulerService {
 				}
 
 				if (count == 0) { // if game was not scheduled on any days
-					return new StringBuffer("Error: Game not scheduled on any day");
+					return new StringBuilder("Error: Game not scheduled on any day");
 				}
 			}
 		}
 		return sb;
 	}
 
-	public StringBuffer playerWiseReport(String playerName) { // method to
-																// generate
-																// player wise
-																// report
-		StringBuffer sb = new StringBuffer();
+	public StringBuilder playerWiseReport(String playerName) { // method to
+		// generate
+		// player wise
+		// report
+		StringBuilder sb = new StringBuilder();
 		// comment
 		if ("".equals(playerName)) { // check if player name is empty
 			return sb.append("Error: Player name should not be empty");
@@ -196,25 +195,43 @@ public class SchedulerService implements ISchedulerService {
 		return sb;
 	}
 
-	public StringBuffer dayWiseReport(String dayName) { //method to generate day wise report
-		StringBuffer sb = new StringBuffer();
-		if ("".equals(dayName) || dayRepo.findOne(dayName) == null) { //check if day name is empty
+	public StringBuilder dayWiseReport(String dayName) { // method to generate
+															// day wise report
+		StringBuilder sb = new StringBuilder();
+		if ("".equals(dayName) || dayRepo.findOne(dayName) == null) { // check
+																		// if
+																		// day
+																		// name
+																		// is
+																		// empty
 			return sb.append("Error: Day name should not be empty");
-		} else {	
-			Day day = dayRepo.findOne(dayName); //get day from repository using day name
+		} else {
+			Day day = dayRepo.findOne(dayName); // get day from repository using
+												// day name
 
 			sb.append("Day Report for " + day.getName() + "\n\n");
 			sb.append("Games played on this day\n");
-			for(Game g : day.getGames()) { //looping games scheduled on day
-				Game game = gameRepo.findOne(g.getName()); //get game from repository using game name
-						
-				if(game != null) { //ensure game is not null
+			for (Game g : day.getGames()) { // looping games scheduled on day
+				Game game = gameRepo.findOne(g.getName()); // get game from
+															// repository using
+															// game name
+
+				if (game != null) { // ensure game is not null
 					sb.append(game.getName() + "\n");
 					sb.append("Players playing in this game\n");
-					for(Player p : playerRepo.findAll()) { //get all players in repository
-						if(p != null) { //ensure player is not null
-							for(Game playerGame : p.getGames()) { //looping all games player is playing in
-								if(playerGame.getName().equals(game.getName())) { //check if game name matches
+					for (Player p : playerRepo.findAll()) { // get all players
+															// in repository
+						if (p != null) { // ensure player is not null
+							for (Game playerGame : p.getGames()) { // looping
+																	// all games
+																	// player is
+																	// playing
+																	// in
+								if (playerGame.getName().equals(game.getName())) { // check
+																					// if
+																					// game
+																					// name
+																					// matches
 									sb.append(p.getName() + "\n");
 								}
 							}

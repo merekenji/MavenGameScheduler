@@ -1,11 +1,16 @@
 package scheduler.assignment;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import scheduler.assignment.data.Day;
 import scheduler.assignment.data.Game;
 import scheduler.assignment.data.Player;
 import scheduler.assignment.interfaces.ISchedulerService;
 
 public class Client {
+	
+	private static final Logger LOGGER = Logger.getLogger(Client.class.getName());
 	
 	private Client() {
 		//This is the main program
@@ -51,9 +56,9 @@ public class Client {
 		service.createDay(day1);
 		service.createDay(day2);
 		
-		System.out.println(service.gameWiseReport("Basketball").toString());
-		System.out.println(service.playerWiseReport("Tom").toString());
-		System.out.println(service.dayWiseReport("Day Two").toString());
+		LOGGER.log(Level.INFO, service.gameWiseReport("Basketball").toString());
+		LOGGER.log(Level.INFO, service.playerWiseReport("Tom").toString());
+		LOGGER.log(Level.INFO, service.dayWiseReport("Day Two").toString());
 	}
 
 }
