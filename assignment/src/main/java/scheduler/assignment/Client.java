@@ -6,6 +6,10 @@ import scheduler.assignment.data.Player;
 import scheduler.assignment.interfaces.ISchedulerService;
 
 public class Client {
+	
+	private Client {
+		//This is the main program
+	}
 
 	public static void main(String[] args) { //main method
 		ISchedulerService service = new SchedulerService(); 
