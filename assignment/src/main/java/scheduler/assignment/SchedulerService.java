@@ -73,7 +73,7 @@ public class SchedulerService implements ISchedulerService {
 
 	public StringBuffer gameWiseReport(String gameName) { //method to generate game wise report
 		StringBuffer sb = new StringBuffer();
-		if (gameName.equals("") || gameName == null) { //check if game name is empty
+		if (gameName.equals("")) { //check if game name is empty
 			return sb.append("Error: Game name should not be empty");
 		} else {
 			Game game = gameRepo.findOne(gameName); //get game from repository using game name
@@ -124,7 +124,7 @@ public class SchedulerService implements ISchedulerService {
 
 	public StringBuffer playerWiseReport(String playerName) { //method to generate player wise report
 		StringBuffer sb = new StringBuffer();
-		if (playerName.equals("") || playerName == null) { //check if player name is empty
+		if (playerName.equals("")) { //check if player name is empty
 			return sb.append("Error: Player name should not be empty");
 		} else {
 			Player player = playerRepo.findOne(playerName); //get player from repository using player name
