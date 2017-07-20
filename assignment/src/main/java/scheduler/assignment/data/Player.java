@@ -5,7 +5,7 @@ public class Player { //data class for Player
 	private String name; //name of player
 	private Game[] games; //games the player is playing in
 	
-	public Player() { //default constructor
+	private Player() { //default constructor
 		name = "";
 		games = null;
 	}
