@@ -73,49 +73,27 @@ public class SchedulerService implements ISchedulerService {
 
 	public StringBuilder gameWiseReport(String gameName) { // method to generate game wise report
 		StringBuilder sb = new StringBuilder();
+		
 		if ("".equals(gameName) || gameRepo.findOne(gameName) == null) { // check if game name is empty
 			return sb.append("Error: Game name should not be empty or Game does not exist");
 		}
 			
 		Game game = gameRepo.findOne(gameName); // get game from repository using game name
-
 		sb.append("Game Report for " + game.getName() + "\n");
 		sb.append("No. of Players: " + game.getNoOfPlayers() + "\n\n");
-
-		int count = 0;
 		sb.append("Players playing in this game\n");
 		for (Player p : playerRepo.findAll()) { // get all players in repository
-			if (p != null) { // ensure player is not null
-				for (Game g : p.getGames()) { // looping games player is playing in
-					if (g.getName().equals(gameName)) { // check if game name matches
-						sb.append(p.getName() + "\n");
-						count++;
-						break;
-					}
-				}
+			StringBuilder sb2 = printPlayerDetails(p, gameName);
+			if (sb2.toString() != "" && sb2.toString() != null) {
+				sb.append(sb2.toString());
 			}
 		}
-		
-		if (count == 0) { // if game does not have any players
-			return new StringBuilder("Error: Game does not have any players");
-		}
-
-		count = 0;
 		sb.append("Days game is scheduled on\n");
 		for (Day d : dayRepo.findAll()) { // get all days in repository
-			if (d != null) { // ensure day is not null
-				for (Game g : d.getGames()) { // looping games scheduled on day
-					if (g.getName().equals(gameName)) { // check if game name matches
-						sb.append(d.getName() + "\n");
-						count++;
-						break;
-					}
-				}
+			StringBuilder sb2 = printDayDetails(d, gameName);
+			if (sb2.toString() != "" && sb2.toString() != null) {
+				sb.append(sb2.toString());
 			}
-		}
-
-		if (count == 0) { // if game was not scheduled on any days
-			return new StringBuilder("Error: Game not scheduled on any day");
 		}
 			
 		return sb;
@@ -129,88 +107,67 @@ public class SchedulerService implements ISchedulerService {
 		}
 		
 		Player player = playerRepo.findOne(playerName); // get player from repository using player name
-
 		sb.append("Player Report for " + player.getName() + "\n\n");
 		sb.append("Games player is playing in:\n");
 		for (Game g : player.getGames()) { // looping games player is playing in
-			if (g != null) { // check if game is not null
-				Game game = gameRepo.findOne(g.getName()); // get game from repository using game name
-
-						if (game != null) { // ensure game is not null
-							sb.append(game.getName() + "\n");
-							sb.append("Days Game is scheduled on\n");
-							for (Day d : dayRepo.findAll()) { // get all days in
-																// repository
-								if (d != null) { // ensure day is not null
-									for (Game dayGame : d.getGames()) { // looping
-																		// games
-																		// that
-																		// is
-																		// scheduled
-																		// on
-																		// day
-										if (dayGame.getName().equals(game.getName())) { // check
-																						// if
-																						// game
-																						// name
-																						// matches
-											sb.append(d.getName() + "\n");
-										}
-									}
-								}
-							}
-						}
-					}
+			Game game = gameRepo.findOne(g.getName()); // get game from repository using game name
+			if (game != null) { // ensure game is not null
+				sb.append(game.getName() + "\n");
+				sb.append("Days Game is scheduled on\n");
+				for (Day d : dayRepo.findAll()) { // get all days in repository
+					sb.append(printDayDetails(d, game.getName()));
 				}
-
+			}
+					
+		}
 		return sb;
 	}
 
-	public StringBuilder dayWiseReport(String dayName) { // method to generate
-															// day wise report
+	public StringBuilder dayWiseReport(String dayName) { // method to generate day wise report
 		StringBuilder sb = new StringBuilder();
-		if ("".equals(dayName) || dayRepo.findOne(dayName) == null) { // check
-																		// if
-																		// day
-																		// name
-																		// is
-																		// empty
+		if ("".equals(dayName) || dayRepo.findOne(dayName) == null) { // check if day name is empty
 			return sb.append("Error: Day name should not be empty or Day does not exist");
 		}
-			Day day = dayRepo.findOne(dayName); // get day from repository using
-												// day name
-
-			sb.append("Day Report for " + day.getName() + "\n\n");
-			sb.append("Games played on this day\n");
-			for (Game g : day.getGames()) { // looping games scheduled on day
-				Game game = gameRepo.findOne(g.getName()); // get game from
-															// repository using
-															// game name
-
-				if (game != null) { // ensure game is not null
-					sb.append(game.getName() + "\n");
-					sb.append("Players playing in this game\n");
-					for (Player p : playerRepo.findAll()) { // get all players
-															// in repository
-						if (p != null) { // ensure player is not null
-							for (Game playerGame : p.getGames()) { // looping
-																	// all games
-																	// player is
-																	// playing
-																	// in
-								if (playerGame.getName().equals(game.getName())) { // check
-																					// if
-																					// game
-																					// name
-																					// matches
-									sb.append(p.getName() + "\n");
-								}
-							}
-						}
-					}
+		
+		Day day = dayRepo.findOne(dayName); // get day from repository using day name
+		sb.append("Day Report for " + day.getName() + "\n\n");
+		sb.append("Games played on this day\n");
+		for (Game g : day.getGames()) { // looping games scheduled on day
+			Game game = gameRepo.findOne(g.getName()); // get game from repository using game name
+			if (game != null) { // ensure game is not null
+				sb.append(game.getName() + "\n");
+				sb.append("Players playing in this game\n");
+				for (Player p : playerRepo.findAll()) { // get all players in repository
+					sb.append(printPlayerDetails(p, game.getName()));
 				}
 			}
-		
+		}
+		return sb;
+	}
+	
+	public StringBuilder printPlayerDetails(Player p, String gameName) {
+		StringBuilder sb = new StringBuilder();
+		if (p != null) { // ensure player is not null
+			for (Game g : p.getGames()) { // looping games player is playing in
+				if (g.getName().equals(gameName)) { // check if game name matches
+					sb.append(p.getName() + "\n");
+					break;
+				}
+			}
+		}
+		return sb;
+	}
+	
+	public StringBuilder printDayDetails(Day d, String gameName) {
+		StringBuilder sb = new StringBuilder();
+		if (d != null) { // ensure day is not null
+			for (Game g : d.getGames()) { // looping games scheduled on day
+				if (g.getName().equals(gameName)) { // check if game name matches
+					sb.append(d.getName() + "\n");
+					break;
+				}
+			}
+		}
 		return sb;
 	}
 

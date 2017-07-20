@@ -20,7 +20,7 @@ public class SchedulerTest {
 	private static final String JERRY = "Jerry";
 	
 	private static final String DAYONE = "Day One";
-
+	
 	@Test
 	public void createGameSuccessfully() {
 		ISchedulerService service = new SchedulerService();
@@ -352,44 +352,6 @@ public class SchedulerTest {
 		ISchedulerService service = new SchedulerService();
 
 		assertEquals("Error: Day name should not be empty or Day does not exist", service.dayWiseReport("").toString());
-	}
-	
-	@Test
-	public void generateGameReportThatAreNotScheduledOnAnyDays() {
-		ISchedulerService service = new SchedulerService();
-		
-		Game game = new Game();
-		game.setName(BASKETBALL);
-		game.setNoOfPlayers(5);
-		service.createGame(game);
-		Game[] games = { game };
-		Player player1 = new Player();
-		player1.setName(TOM);
-		player1.setGames(games);
-		Player player2 = new Player();
-		player2.setName(JERRY);
-		player2.setGames(games);
-		service.createPlayer(player1);
-		service.createPlayer(player2);
-		
-		assertEquals("Error: Game not scheduled on any day", service.gameWiseReport(BASKETBALL).toString());
-	}
-	
-	@Test
-	public void generateGameReportThatHasNoPlayers() {
-		ISchedulerService service = new SchedulerService();
-		
-		Game game = new Game();
-		game.setName(BASKETBALL);
-		game.setNoOfPlayers(5);
-		service.createGame(game);
-		Game[] games = { game };
-		Day day = new Day();
-		day.setName(DAYONE);
-		day.setGames(games);
-		service.createDay(day);
-		
-		assertEquals("Error: Game does not have any players", service.gameWiseReport(BASKETBALL).toString());
 	}
 	
 }
