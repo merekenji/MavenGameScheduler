@@ -9,12 +9,16 @@ import scheduler.assignment.data.Player;
 import scheduler.assignment.interfaces.ISchedulerService;
 
 public class SchedulerTest {
+	
+	private final String tennis = "Tennis";
+	private final String basketball = "Basketball";
+	private final String golf = "Golf";
 
 	@Test
 	public void createGameSuccessfully() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game = new Game("Tennis", 2);
+		Game game = new Game(tennis, 2);
 		assertEquals("Success: Game has been saved successfully", service.createGame(game));
 	}
 
@@ -30,7 +34,7 @@ public class SchedulerTest {
 	public void createGameWithNoPlayers() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game = new Game("Golf", 0);
+		Game game = new Game(golf, 0);
 		assertEquals("Error: There should at least be 1 player playing in the game", service.createGame(game));
 	}
 
@@ -38,7 +42,7 @@ public class SchedulerTest {
 	public void createDuplicateGame() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game = new Game("Tennis", 2);
+		Game game = new Game(tennis, 2);
 		service.createGame(game);
 		assertEquals("Error: Game has already exist", service.createGame(game));
 	}
@@ -54,7 +58,7 @@ public class SchedulerTest {
 	public void createPlayerSuccessfully() {
 		ISchedulerService service = new SchedulerService();
 		
-		Game game1 = new Game("Tennis", 2);
+		Game game1 = new Game(tennis, 2);
 		Game game2 = new Game("Football", 11);
 		Game game3 = new Game("Badminton", 2);
 		service.createGame(game1);
@@ -67,7 +71,7 @@ public class SchedulerTest {
 	public void createPlayerThatPlayNoGames() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game1 = new Game("Tennis", 2);
+		Game game1 = new Game(tennis, 2);
 		Game game2 = new Game("Football", 11);
 		Game game3 = new Game("Badminton", 2);
 		Game[] games = { game1, game2, game3 };
@@ -79,7 +83,7 @@ public class SchedulerTest {
 	public void createPlayerWithNoName() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game = new Game("Tennis", 2);
+		Game game = new Game(tennis, 2);
 		service.createGame(game);
 		Game[] games = { game };
 		Player player = new Player("", games);
@@ -90,7 +94,7 @@ public class SchedulerTest {
 	public void createDuplicatePlayer() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game = new Game("Tennis", 2);
+		Game game = new Game(tennis, 2);
 		service.createGame(game);
 		Game[] games = { game };
 		Player player = new Player("Tom", games);
@@ -109,8 +113,8 @@ public class SchedulerTest {
 	public void createDaySuccessfully() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game1 = new Game("Tennis", 2);
-		Game game2 = new Game("Basketball", 5);
+		Game game1 = new Game(tennis, 2);
+		Game game2 = new Game(basketball, 5);
 		service.createGame(game1);
 		service.createGame(game2);
 		Game[] games = { game1, game2 };
@@ -122,8 +126,8 @@ public class SchedulerTest {
 	public void createDayWithNoGamesInRepo() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game1 = new Game("Tennis", 2);
-		Game game2 = new Game("Basketball", 5);
+		Game game1 = new Game(tennis, 2);
+		Game game2 = new Game(basketball, 5);
 		Game[] games = { game1, game2 };
 		Day day = new Day("Day One", games);
 		assertEquals("Error: All game should exist in game repo", service.createDay(day));
@@ -133,7 +137,7 @@ public class SchedulerTest {
 	public void createDayWithoutName() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game = new Game("Tennis", 2);
+		Game game = new Game(tennis, 2);
 		service.createGame(game);
 		Game[] games = { game };
 		Day day = new Day("", games);
@@ -144,7 +148,7 @@ public class SchedulerTest {
 	public void createDuplicateDay() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game = new Game("Tennis", 2);
+		Game game = new Game(tennis, 2);
 		service.createGame(game);
 		Game[] games = { game };
 		Day day = new Day("Day One", games);
@@ -163,7 +167,7 @@ public class SchedulerTest {
 	public void generateGameReportSuccessfully() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game = new Game("Basketball", 5);
+		Game game = new Game(basketball, 5);
 		service.createGame(game);
 		Game[] games = { game };
 		Player player1 = new Player("Tom", games);
@@ -202,7 +206,7 @@ public class SchedulerTest {
 	public void generatePlayerReportSuccessfully() {
 		ISchedulerService service = new SchedulerService();
 		
-		Game game = new Game("Basketball", 5);
+		Game game = new Game(basketball, 5);
 		service.createGame(game);
 		Game[] games = { game };
 		Player player1 = new Player("Tom", games);
@@ -238,7 +242,7 @@ public class SchedulerTest {
 	public void generateDayReportSuccessfully() {
 		ISchedulerService service = new SchedulerService();
 		
-		Game game = new Game("Basketball", 5);
+		Game game = new Game(basketball, 5);
 		service.createGame(game);
 		Game[] games = { game };
 		Player player1 = new Player("Tom", games);
@@ -274,7 +278,7 @@ public class SchedulerTest {
 	public void generateGameReportThatAreNotScheduledOnAnyDays() {
 		ISchedulerService service = new SchedulerService();
 		
-		Game game = new Game("Basketball", 5);
+		Game game = new Game(basketball, 5);
 		service.createGame(game);
 		Game[] games = { game };
 		Player player1 = new Player("Tom", games);
@@ -289,7 +293,7 @@ public class SchedulerTest {
 	public void generateGameReportThatHasNoPlayers() {
 		ISchedulerService service = new SchedulerService();
 		
-		Game game = new Game("Basketball", 5);
+		Game game = new Game(basketball, 5);
 		service.createGame(game);
 		Game[] games = { game };
 		Day day = new Day("Day One", games);
