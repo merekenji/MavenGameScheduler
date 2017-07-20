@@ -198,7 +198,7 @@ public class SchedulerService implements ISchedulerService {
 
 	public StringBuffer dayWiseReport(String dayName) { //method to generate day wise report
 		StringBuffer sb = new StringBuffer();
-		if ("".equals(dayName) && dayRepo.findOne(dayName) == null) { //check if day name is empty
+		if ("".equals(dayName) || dayRepo.findOne(dayName) == null) { //check if day name is empty
 			return sb.append("Error: Day name should not be empty");
 		} else {	
 			Day day = dayRepo.findOne(dayName); //get day from repository using day name
