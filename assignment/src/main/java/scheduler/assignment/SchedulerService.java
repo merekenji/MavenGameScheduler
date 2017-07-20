@@ -170,18 +170,16 @@ public class SchedulerService implements ISchedulerService {
 				sb.append("Day Report for " + day.getName() + "\n\n");
 				sb.append("Games played on this day\n");
 				for(Game g : day.getGames()) { //looping games scheduled on day
-					if(g != null) { //ensure game is not null
-						Game game = gameRepo.findOne(g.getName()); //get game from repository using game name
+					Game game = gameRepo.findOne(g.getName()); //get game from repository using game name
 						
-						if(game != null) { //ensure game is not null
-							sb.append(game.getName() + "\n");
-							sb.append("Players playing in this game\n");
-							for(Player p : playerRepo.findAll()) { //get all players in repository
-								if(p != null) { //ensure player is not null
-									for(Game playerGame : p.getGames()) { //looping all games player is playing in
-										if(playerGame.getName().equals(game.getName())) { //check if game name matches
-											sb.append(p.getName() + "\n");
-										}
+					if(game != null) { //ensure game is not null
+						sb.append(game.getName() + "\n");
+						sb.append("Players playing in this game\n");
+						for(Player p : playerRepo.findAll()) { //get all players in repository
+							if(p != null) { //ensure player is not null
+								for(Game playerGame : p.getGames()) { //looping all games player is playing in
+									if(playerGame.getName().equals(game.getName())) { //check if game name matches
+										sb.append(p.getName() + "\n");
 									}
 								}
 							}

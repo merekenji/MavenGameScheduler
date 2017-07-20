@@ -13,12 +13,22 @@ public class SchedulerTest {
 	private final String tennis = "Tennis";
 	private final String basketball = "Basketball";
 	private final String golf = "Golf";
+	private final String football = "Football";
+	private final String badminton = "Badminton";
+	
+	private final String tom = "Tom";
+	private final String jerry = "Jerry";
+	
+	private final String dayOne = "Day One";
+	private final String dayTwo = "Day Two";
 
 	@Test
 	public void createGameSuccessfully() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game = new Game(tennis, 2);
+		Game game = new Game();
+		game.setName(tennis);
+		game.setNoOfPlayers(2);
 		assertEquals("Success: Game has been saved successfully", service.createGame(game));
 	}
 
@@ -26,7 +36,9 @@ public class SchedulerTest {
 	public void createGameWithNullGameName() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game = new Game("", 5);
+		Game game = new Game();
+		game.setName("");
+		game.setNoOfPlayers(5);
 		assertEquals("Error: The Game name should not be empty", service.createGame(game));
 	}
 
@@ -34,7 +46,9 @@ public class SchedulerTest {
 	public void createGameWithNoPlayers() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game = new Game(golf, 0);
+		Game game = new Game();
+		game.setName(golf);
+		game.setNoOfPlayers(0);
 		assertEquals("Error: There should at least be 1 player playing in the game", service.createGame(game));
 	}
 
@@ -42,7 +56,9 @@ public class SchedulerTest {
 	public void createDuplicateGame() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game = new Game(tennis, 2);
+		Game game = new Game();
+		game.setName(tennis);
+		game.setNoOfPlayers(2);
 		service.createGame(game);
 		assertEquals("Error: Game has already exist", service.createGame(game));
 	}
@@ -58,12 +74,20 @@ public class SchedulerTest {
 	public void createPlayerSuccessfully() {
 		ISchedulerService service = new SchedulerService();
 		
-		Game game1 = new Game(tennis, 2);
-		Game game2 = new Game("Football", 11);
-		Game game3 = new Game("Badminton", 2);
+		Game game1 = new Game();
+		game1.setName(tennis);
+		game1.setNoOfPlayers(2);
+		Game game2 = new Game();
+		game2.setName(football);
+		game2.setNoOfPlayers(11);
+		Game game3 = new Game();
+		game3.setName(badminton);
+		game3.setNoOfPlayers(2);
 		service.createGame(game1);
 		Game[] games = { game1, game2, game3 };
-		Player player = new Player("Tom", games);
+		Player player = new Player();
+		player.setName(tom);
+		player.setGames(games);
 		assertEquals("Success: Player has been saved successfully", service.createPlayer(player));
 	}
 
@@ -71,11 +95,19 @@ public class SchedulerTest {
 	public void createPlayerThatPlayNoGames() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game1 = new Game(tennis, 2);
-		Game game2 = new Game("Football", 11);
-		Game game3 = new Game("Badminton", 2);
+		Game game1 = new Game();
+		game1.setName(tennis);
+		game1.setNoOfPlayers(2);
+		Game game2 = new Game();
+		game2.setName(football);
+		game2.setNoOfPlayers(11);
+		Game game3 = new Game();
+		game3.setName(badminton);
+		game3.setNoOfPlayers(2);
 		Game[] games = { game1, game2, game3 };
-		Player player = new Player("Tom", games);
+		Player player = new Player();
+		player.setName(tom);
+		player.setGames(games);
 		assertEquals("Error: At least 1 game should exist in game repo", service.createPlayer(player));
 	}
 
@@ -83,10 +115,14 @@ public class SchedulerTest {
 	public void createPlayerWithNoName() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game = new Game(tennis, 2);
+		Game game = new Game();
+		game.setName(tennis);
+		game.setNoOfPlayers(2);
 		service.createGame(game);
 		Game[] games = { game };
-		Player player = new Player("", games);
+		Player player = new Player();
+		player.setName("");
+		player.setGames(games);
 		assertEquals("Error: The Player name should not be empty", service.createPlayer(player));
 	}
 
@@ -94,10 +130,14 @@ public class SchedulerTest {
 	public void createDuplicatePlayer() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game = new Game(tennis, 2);
+		Game game = new Game();
+		game.setName(tennis);
+		game.setNoOfPlayers(2);
 		service.createGame(game);
 		Game[] games = { game };
-		Player player = new Player("Tom", games);
+		Player player = new Player();
+		player.setName(tom);
+		player.setGames(games);
 		service.createPlayer(player);
 		assertEquals("Error: Player has already exist", service.createPlayer(player));
 	}
@@ -113,12 +153,18 @@ public class SchedulerTest {
 	public void createDaySuccessfully() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game1 = new Game(tennis, 2);
-		Game game2 = new Game(basketball, 5);
+		Game game1 = new Game();
+		game1.setName(tennis);
+		game1.setNoOfPlayers(2);
+		Game game2 = new Game();
+		game2.setName(basketball);
+		game2.setNoOfPlayers(5);
 		service.createGame(game1);
 		service.createGame(game2);
 		Game[] games = { game1, game2 };
-		Day day = new Day("Day One", games);
+		Day day = new Day();
+		day.setName(dayOne);
+		day.setGames(games);
 		assertEquals("Success: Day has been saved successfully", service.createDay(day));
 	}
 
@@ -126,10 +172,16 @@ public class SchedulerTest {
 	public void createDayWithNoGamesInRepo() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game1 = new Game(tennis, 2);
-		Game game2 = new Game(basketball, 5);
+		Game game1 = new Game();
+		game1.setName(tennis);
+		game1.setNoOfPlayers(2);
+		Game game2 = new Game();
+		game2.setName(basketball);
+		game2.setNoOfPlayers(5);
 		Game[] games = { game1, game2 };
-		Day day = new Day("Day One", games);
+		Day day = new Day();
+		day.setName(dayOne);
+		day.setGames(games);
 		assertEquals("Error: All game should exist in game repo", service.createDay(day));
 	}
 
@@ -137,10 +189,14 @@ public class SchedulerTest {
 	public void createDayWithoutName() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game = new Game(tennis, 2);
+		Game game = new Game();
+		game.setName(tennis);
+		game.setNoOfPlayers(2);
 		service.createGame(game);
 		Game[] games = { game };
-		Day day = new Day("", games);
+		Day day = new Day();
+		day.setName("");
+		day.setGames(games);
 		assertEquals("Error: The Day name should not be empty", service.createDay(day));
 	}
 
@@ -148,10 +204,14 @@ public class SchedulerTest {
 	public void createDuplicateDay() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game = new Game(tennis, 2);
+		Game game = new Game();
+		game.setName(tennis);
+		game.setNoOfPlayers(2);
 		service.createGame(game);
 		Game[] games = { game };
-		Day day = new Day("Day One", games);
+		Day day = new Day();
+		day.setName(dayOne);
+		day.setGames(games);
 		service.createDay(day);
 		assertEquals("Error: Day has already exist", service.createDay(day));
 	}
@@ -167,14 +227,22 @@ public class SchedulerTest {
 	public void generateGameReportSuccessfully() {
 		ISchedulerService service = new SchedulerService();
 
-		Game game = new Game(basketball, 5);
+		Game game = new Game();
+		game.setName(basketball);
+		game.setNoOfPlayers(5);
 		service.createGame(game);
 		Game[] games = { game };
-		Player player1 = new Player("Tom", games);
-		Player player2 = new Player("Jerry", games);
+		Player player1 = new Player();
+		player1.setName(tom);
+		player1.setGames(games);
+		Player player2 = new Player();
+		player2.setName(jerry);
+		player2.setGames(games);
 		service.createPlayer(player1);
 		service.createPlayer(player2);
-		Day day = new Day("Day One", games);
+		Day day = new Day();
+		day.setName(dayOne);
+		day.setGames(games);
 		service.createDay(day);
 
 		StringBuffer sb = new StringBuffer();
@@ -206,12 +274,19 @@ public class SchedulerTest {
 	public void generatePlayerReportSuccessfully() {
 		ISchedulerService service = new SchedulerService();
 		
-		Game game = new Game(basketball, 5);
+		Game game = new Game();
+		game.setName(basketball);
+		game.setNoOfPlayers(5);
 		service.createGame(game);
 		Game[] games = { game };
-		Player player1 = new Player("Tom", games);
+		Player player1 = new Player();
+		player1.setName(tom);
+		player1.setGames(games);
 		service.createPlayer(player1);
-		Day day = new Day("Day One", games);
+		Day day = new Day();
+		day.setName(dayOne);
+		day.setGames(games);
+		
 		service.createDay(day);
 		
 		StringBuffer sb = new StringBuffer();
@@ -242,12 +317,18 @@ public class SchedulerTest {
 	public void generateDayReportSuccessfully() {
 		ISchedulerService service = new SchedulerService();
 		
-		Game game = new Game(basketball, 5);
+		Game game = new Game();
+		game.setName(basketball);
+		game.setNoOfPlayers(5);
 		service.createGame(game);
 		Game[] games = { game };
-		Player player1 = new Player("Tom", games);
+		Player player1 = new Player();
+		player1.setName(tom);
+		player1.setGames(games);
 		service.createPlayer(player1);
-		Day day = new Day("Day One", games);
+		Day day = new Day();
+		day.setName(dayOne);
+		day.setGames(games);
 		service.createDay(day);
 		
 		StringBuffer sb = new StringBuffer();
@@ -278,11 +359,17 @@ public class SchedulerTest {
 	public void generateGameReportThatAreNotScheduledOnAnyDays() {
 		ISchedulerService service = new SchedulerService();
 		
-		Game game = new Game(basketball, 5);
+		Game game = new Game();
+		game.setName(basketball);
+		game.setNoOfPlayers(5);
 		service.createGame(game);
 		Game[] games = { game };
-		Player player1 = new Player("Tom", games);
-		Player player2 = new Player("Jerry", games);
+		Player player1 = new Player();
+		player1.setName(tom);
+		player1.setGames(games);
+		Player player2 = new Player();
+		player2.setName(jerry);
+		player2.setGames(games);
 		service.createPlayer(player1);
 		service.createPlayer(player2);
 		
@@ -293,10 +380,14 @@ public class SchedulerTest {
 	public void generateGameReportThatHasNoPlayers() {
 		ISchedulerService service = new SchedulerService();
 		
-		Game game = new Game(basketball, 5);
+		Game game = new Game();
+		game.setName(basketball);
+		game.setNoOfPlayers(5);
 		service.createGame(game);
 		Game[] games = { game };
-		Day day = new Day("Day One", games);
+		Day day = new Day();
+		day.setName(dayOne);
+		day.setGames(games);
 		service.createDay(day);
 		
 		assertEquals("Error: Game does not have any players", service.gameWiseReport("Basketball").toString());

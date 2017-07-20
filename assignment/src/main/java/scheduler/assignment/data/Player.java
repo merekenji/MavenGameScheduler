@@ -5,16 +5,11 @@ public class Player { //data class for Player
 	private String name; //name of player
 	private Game[] games; //games the player is playing in
 	
-	private Player() { //default constructor
+	public Player() { //default constructor
 		name = "";
 		games = null;
 	}
 	
-	public Player(String name, Game[] games) { //constructor with parameters
-		this.name = name;
-		this.games = games;
-	}
-
 	public String getName() { //getter method for name
 		return name;
 	}

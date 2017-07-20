@@ -5,14 +5,9 @@ public class Game { //data class for Game
 	private String name; //name of Game
 	private int noOfPlayers; //number of players to play this game
 	
-	private Game() { //default constructor
+	public Game() { //default constructor
 		name = "";
 		noOfPlayers = 0;
-	}
-	
-	public Game(String name, int noOfPlayers) { //constructor with parameters
-		this.name = name;
-		this.noOfPlayers = noOfPlayers;
 	}
 
 	public String getName() { //getter method for name
