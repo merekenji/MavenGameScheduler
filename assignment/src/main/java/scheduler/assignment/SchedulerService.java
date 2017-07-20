@@ -14,8 +14,7 @@ import scheduler.assignment.interfaces.ISchedulerService;
 public class SchedulerService implements ISchedulerService {
 
 	private IGameRepo gameRepo; // Game Repository object to store data of Games
-	private IPlayerRepo playerRepo; // Player Repository object to store data of
-									// Players
+	private IPlayerRepo playerRepo; // Player Repository object to store data of Players
 	private IDayRepo dayRepo; // Day Repository object to store data of Days
 
 	public SchedulerService() { // default constructor
@@ -24,9 +23,7 @@ public class SchedulerService implements ISchedulerService {
 		dayRepo = new DayRepo();
 	}
 
-	public SchedulerService(GameRepo gameRepo, PlayerRepo playerRepo, DayRepo dayRepo) { // constructor
-																							// with
-																							// parameters
+	public SchedulerService(GameRepo gameRepo, PlayerRepo playerRepo, DayRepo dayRepo) { // constructor with parameters
 		this.gameRepo = gameRepo;
 		this.playerRepo = playerRepo;
 		this.dayRepo = dayRepo;
@@ -37,14 +34,11 @@ public class SchedulerService implements ISchedulerService {
 	}
 
 	public String createPlayer(Player p) { // method to create player
-		boolean exist = false; // assuming games Player is playing does not
-								// exist
+		boolean exist = false; // assuming games Player is playing does not exist
 		if (p != null) { // checking if Player is not null
 			Game[] games = p.getGames();
 			for (Game g : games) { // looping through games Player is playing
-				if (gameRepo.findOne(g.getName()) != null) { // checking if game
-																// exist in
-																// repository
+				if (gameRepo.findOne(g.getName()) != null) { // checking if game exist in repository
 					exist = true;
 					break;
 				}
@@ -59,15 +53,11 @@ public class SchedulerService implements ISchedulerService {
 	}
 
 	public String createDay(Day d) { // method to create day
-		boolean exist = true; // assuming games that is scheduled on Day does
-								// not exist
+		boolean exist = true; // assuming games that is scheduled on Day does not exist
 		if (d != null) { // checking if Day is not null
 			Game[] games = d.getGames();
-			for (Game g : games) { // looping through games that is scheduled on
-									// Day
-				if (gameRepo.findOne(g.getName()) == null) { // checking if game
-																// exist in
-																// repository
+			for (Game g : games) { // looping through games that is scheduled on Day
+				if (gameRepo.findOne(g.getName()) == null) { // checking if game exist in repository
 					exist = false;
 					break;
 				}
@@ -83,86 +73,68 @@ public class SchedulerService implements ISchedulerService {
 
 	public StringBuilder gameWiseReport(String gameName) { // method to generate game wise report
 		StringBuilder sb = new StringBuilder();
-		if ("".equals(gameName)) { // check if game name is empty
-			return sb.append("Error: Game name should not be empty");
-		} else {
-			Game game = gameRepo.findOne(gameName); // get game from repository
-													// using game name
-			if (game == null) { // check if game is null
-				return sb.append("Error: Game does not exist");
-			} else {
-				sb.append("Game Report for " + game.getName() + "\n");
-				sb.append("No. of Players: " + game.getNoOfPlayers() + "\n\n");
+		if ("".equals(gameName) || gameRepo.findOne(gameName) == null) { // check if game name is empty
+			return sb.append("Error: Game name should not be empty or Game does not exist");
+		}
+			
+		Game game = gameRepo.findOne(gameName); // get game from repository using game name
 
-				int count = 0;
-				sb.append("Players playing in this game\n");
-				for (Player p : playerRepo.findAll()) { // get all players in
-														// repository
-					if (p != null) { // ensure player is not null
-						for (Game g : p.getGames()) { // looping games player is
-														// playing in
-							if (g.getName().equals(gameName)) { // check if game
-																// name matches
-								sb.append(p.getName() + "\n");
-								count++;
-								break;
-							}
-						}
+		sb.append("Game Report for " + game.getName() + "\n");
+		sb.append("No. of Players: " + game.getNoOfPlayers() + "\n\n");
+
+		int count = 0;
+		sb.append("Players playing in this game\n");
+		for (Player p : playerRepo.findAll()) { // get all players in repository
+			if (p != null) { // ensure player is not null
+				for (Game g : p.getGames()) { // looping games player is playing in
+					if (g.getName().equals(gameName)) { // check if game name matches
+						sb.append(p.getName() + "\n");
+						count++;
+						break;
 					}
-				}
-				if (count == 0) { // if game does not have any players
-					return new StringBuilder("Error: Game does not have any players");
-				}
-
-				count = 0;
-				sb.append("Days game is scheduled on\n");
-				for (Day d : dayRepo.findAll()) { // get all days in repository
-					if (d != null) { // ensure day is not null
-						for (Game g : d.getGames()) { // looping games scheduled
-														// on day
-							if (g.getName().equals(gameName)) { // check if game
-																// name matches
-								sb.append(d.getName() + "\n");
-								count++;
-								break;
-							}
-						}
-					}
-				}
-
-				if (count == 0) { // if game was not scheduled on any days
-					return new StringBuilder("Error: Game not scheduled on any day");
 				}
 			}
 		}
+		
+		if (count == 0) { // if game does not have any players
+			return new StringBuilder("Error: Game does not have any players");
+		}
+
+		count = 0;
+		sb.append("Days game is scheduled on\n");
+		for (Day d : dayRepo.findAll()) { // get all days in repository
+			if (d != null) { // ensure day is not null
+				for (Game g : d.getGames()) { // looping games scheduled on day
+					if (g.getName().equals(gameName)) { // check if game name matches
+						sb.append(d.getName() + "\n");
+						count++;
+						break;
+					}
+				}
+			}
+		}
+
+		if (count == 0) { // if game was not scheduled on any days
+			return new StringBuilder("Error: Game not scheduled on any day");
+		}
+			
 		return sb;
 	}
 
-	public StringBuilder playerWiseReport(String playerName) { // method to
-		// generate
-		// player wise
-		// report
+	public StringBuilder playerWiseReport(String playerName) { // method to generate player wise report
 		StringBuilder sb = new StringBuilder();
-		// comment
-		if ("".equals(playerName)) { // check if player name is empty
-			return sb.append("Error: Player name should not be empty");
-		} else {
-			Player player = playerRepo.findOne(playerName); // get player from
-															// repository using
-															// player name
-			if (player == null) { // check if player is null
-				return sb.append("Error: Player does not exist");
-			} else {
-				sb.append("Player Report for " + player.getName() + "\n\n");
-				sb.append("Games player is playing in:\n");
-				for (Game g : player.getGames()) { // looping games player is
-													// playing in
-					if (g != null) { // check if game is not null
-						Game game = gameRepo.findOne(g.getName()); // get game
-																	// from
-																	// repository
-																	// using
-																	// game name
+		
+		if ("".equals(playerName) || playerRepo.findOne(playerName) == null) { // check if player name is empty
+			return sb.append("Error: Player name should not be empty or Player does not exist");
+		}
+		
+		Player player = playerRepo.findOne(playerName); // get player from repository using player name
+
+		sb.append("Player Report for " + player.getName() + "\n\n");
+		sb.append("Games player is playing in:\n");
+		for (Game g : player.getGames()) { // looping games player is playing in
+			if (g != null) { // check if game is not null
+				Game game = gameRepo.findOne(g.getName()); // get game from repository using game name
 
 						if (game != null) { // ensure game is not null
 							sb.append(game.getName() + "\n");
@@ -190,8 +162,7 @@ public class SchedulerService implements ISchedulerService {
 						}
 					}
 				}
-			}
-		}
+
 		return sb;
 	}
 
@@ -204,8 +175,8 @@ public class SchedulerService implements ISchedulerService {
 																		// name
 																		// is
 																		// empty
-			return sb.append("Error: Day name should not be empty");
-		} else {
+			return sb.append("Error: Day name should not be empty or Day does not exist");
+		}
 			Day day = dayRepo.findOne(dayName); // get day from repository using
 												// day name
 
@@ -239,7 +210,7 @@ public class SchedulerService implements ISchedulerService {
 					}
 				}
 			}
-		}
+		
 		return sb;
 	}
 

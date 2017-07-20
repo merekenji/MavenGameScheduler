@@ -20,7 +20,6 @@ public class SchedulerTest {
 	private static final String JERRY = "Jerry";
 	
 	private static final String DAYONE = "Day One";
-	private static final String DAYTWO = "Day Two";
 
 	@Test
 	public void createGameSuccessfully() {
@@ -260,14 +259,14 @@ public class SchedulerTest {
 	public void generateNonExistantGameReport() {
 		ISchedulerService service = new SchedulerService();
 
-		assertEquals("Error: Game does not exist", service.gameWiseReport(TENNIS).toString());
+		assertEquals("Error: Game name should not be empty or Game does not exist", service.gameWiseReport(TENNIS).toString());
 	}
 
 	@Test
 	public void generateEmptyGameReport() {
 		ISchedulerService service = new SchedulerService();
 
-		assertEquals("Error: Game name should not be empty", service.gameWiseReport("").toString());
+		assertEquals("Error: Game name should not be empty or Game does not exist", service.gameWiseReport("").toString());
 	}
 
 	@Test
@@ -303,14 +302,14 @@ public class SchedulerTest {
 	public void generateNonExistantPlayerReport() {
 		ISchedulerService service = new SchedulerService();
 
-		assertEquals("Error: Player does not exist", service.playerWiseReport(TOM).toString());
+		assertEquals("Error: Player name should not be empty or Player does not exist", service.playerWiseReport(TOM).toString());
 	}
 
 	@Test
 	public void generateEmptyPlayerReport() {
 		ISchedulerService service = new SchedulerService();
 
-		assertEquals("Error: Player name should not be empty", service.playerWiseReport("").toString());
+		assertEquals("Error: Player name should not be empty or Player does not exist", service.playerWiseReport("").toString());
 	}
 
 	@Test
@@ -345,14 +344,14 @@ public class SchedulerTest {
 	public void generateNonExistantDayReport() {
 		ISchedulerService service = new SchedulerService();
 
-		assertEquals("Error: Day name should not be empty", service.dayWiseReport(DAYONE).toString());
+		assertEquals("Error: Day name should not be empty or Day does not exist", service.dayWiseReport(DAYONE).toString());
 	}
 
 	@Test
 	public void generateEmptyDayReport() {
 		ISchedulerService service = new SchedulerService();
 
-		assertEquals("Error: Day name should not be empty", service.dayWiseReport("").toString());
+		assertEquals("Error: Day name should not be empty or Day does not exist", service.dayWiseReport("").toString());
 	}
 	
 	@Test
