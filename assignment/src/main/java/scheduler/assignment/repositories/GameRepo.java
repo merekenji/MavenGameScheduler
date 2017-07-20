@@ -16,9 +16,6 @@ public class GameRepo implements IGameRepo { //implementation class for Game Rep
 	}
 	
 	public String save(Game g) { //method to save game into repository
-		if(g == null) { //if Game is null
-			return "Error: The Game object is null";
-		}
 		if("".equals(g.getName()) || g.getName() == null) { //if game name is empty
 			return "Error: The Game name should not be empty";
 		}

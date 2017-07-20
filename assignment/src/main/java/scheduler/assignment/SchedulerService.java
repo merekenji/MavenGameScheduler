@@ -30,6 +30,9 @@ public class SchedulerService implements ISchedulerService {
 	}
 
 	public String createGame(Game g) { // method to create game
+		if(g == null) {
+			return "Error: The Game object is null";
+		}
 		return gameRepo.save(g);
 	}
 

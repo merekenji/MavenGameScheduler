@@ -10,6 +10,11 @@ public class Player { //data class for Player
 		games = null;
 	}
 	
+	public Player(String name, Game[] games) {
+		playerName = name;
+		this.games = games;
+	}
+	
 	public String getName() { //getter method for name
 		return playerName;
 	}

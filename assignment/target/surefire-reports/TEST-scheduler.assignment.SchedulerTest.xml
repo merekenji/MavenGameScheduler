@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="24" failures="0" name="scheduler.assignment.SchedulerTest" time="0.017" errors="0" skipped="0">
+<testsuite tests="24" failures="0" name="scheduler.assignment.SchedulerTest" time="0.015" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_131\jre\bin"/>
@@ -27,7 +27,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 7"/>
-    <property name="classworlds.conf" value="D:\Workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf5432028708215161702.tmp"/>
+    <property name="classworlds.conf" value="D:\Workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf6362452990887163370.tmp"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_131\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jre1.8.0_131/bin/server;C:/Program Files/Java/jre1.8.0_131/bin;C:/Program Files/Java/jre1.8.0_131/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files\CapgeminiScripts\Support Tools\;C:\Program Files\Internet Explorer;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files\CapgeminiScripts\Support Tools\;C:\Users\kenteo\AppData\Local\Programs\Git\cmd;D:\Users\kenteo\Downloads\sts-bundle\sts-3.8.4.RELEASE;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -61,10 +61,10 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="scheduler.assignment.SchedulerTest" name="generatePlayerReportSuccessfully" time="0.017"/>
+  <testcase classname="scheduler.assignment.SchedulerTest" name="generatePlayerReportSuccessfully" time="0"/>
   <testcase classname="scheduler.assignment.SchedulerTest" name="generateEmptyGameReport" time="0"/>
   <testcase classname="scheduler.assignment.SchedulerTest" name="generateEmptyDayReport" time="0"/>
-  <testcase classname="scheduler.assignment.SchedulerTest" name="createGameSuccessfully" time="0"/>
+  <testcase classname="scheduler.assignment.SchedulerTest" name="createGameSuccessfully" time="0.015"/>
   <testcase classname="scheduler.assignment.SchedulerTest" name="createDuplicateDay" time="0"/>
   <testcase classname="scheduler.assignment.SchedulerTest" name="generateNonExistantDayReport" time="0"/>
   <testcase classname="scheduler.assignment.SchedulerTest" name="createGameWithNoPlayers" time="0"/>

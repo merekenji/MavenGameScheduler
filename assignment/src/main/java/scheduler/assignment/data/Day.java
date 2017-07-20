@@ -9,6 +9,11 @@ public class Day { //data class for Day
 		dayName = "";
 		games = null;
 	}
+	
+	public Day(String name, Game[] games) {
+		dayName = name;
+		this.games = games;
+	}
 
 	public String getName() { //getter method for name
 		return dayName;

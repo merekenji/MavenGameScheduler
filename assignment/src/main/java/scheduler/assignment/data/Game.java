@@ -9,6 +9,11 @@ public class Game { //data class for Game
 		gameName = "";
 		noOfPlayers = 0;
 	}
+	
+	public Game(String name, int noOfPlayers) {
+		gameName = name;
+		this.noOfPlayers = noOfPlayers;
+	}
 
 	public String getName() { //getter method for name
 		return gameName;
