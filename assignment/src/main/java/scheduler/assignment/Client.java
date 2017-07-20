@@ -7,7 +7,7 @@ import scheduler.assignment.interfaces.ISchedulerService;
 
 public class Client {
 	
-	private Client {
+	private Client() {
 		//This is the main program
 	}
 
