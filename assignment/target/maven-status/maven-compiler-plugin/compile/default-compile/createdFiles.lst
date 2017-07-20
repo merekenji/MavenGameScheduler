@@ -1,6 +1,5 @@
 scheduler\assignment\Client.class
 scheduler\assignment\interfaces\ISchedulerService.class
-scheduler\assignment\App.class
 scheduler\assignment\data\Game.class
 scheduler\assignment\repositories\GameRepo.class
 scheduler\assignment\interfaces\IDayRepo.class

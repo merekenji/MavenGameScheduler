@@ -345,7 +345,7 @@ public class SchedulerTest {
 	public void generateNonExistantDayReport() {
 		ISchedulerService service = new SchedulerService();
 
-		assertEquals("Error: Day does not exist", service.dayWiseReport("Day One").toString());
+		assertEquals("Error: Day name should not be empty", service.dayWiseReport("Day One").toString());
 	}
 
 	@Test
