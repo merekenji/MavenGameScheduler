@@ -124,6 +124,7 @@ public class SchedulerService implements ISchedulerService {
 
 	public StringBuffer playerWiseReport(String playerName) { //method to generate player wise report
 		StringBuffer sb = new StringBuffer();
+		//comment
 		if (playerName.equals("")) { //check if player name is empty
 			return sb.append("Error: Player name should not be empty");
 		} else {
