@@ -10,17 +10,17 @@ import scheduler.assignment.interfaces.ISchedulerService;
 
 public class SchedulerTest {
 	
-	private final String tennis = "Tennis";
-	private final String basketball = "Basketball";
-	private final String golf = "Golf";
-	private final String football = "Football";
-	private final String badminton = "Badminton";
+	private static final String tennis = "Tennis";
+	private static final String basketball = "Basketball";
+	private static final String golf = "Golf";
+	private static final String football = "Football";
+	private static final String badminton = "Badminton";
 	
-	private final String tom = "Tom";
-	private final String jerry = "Jerry";
+	private static final String tom = "Tom";
+	private static final String jerry = "Jerry";
 	
-	private final String dayOne = "Day One";
-	private final String dayTwo = "Day Two";
+	private static final String dayOne = "Day One";
+	private static final String dayTwo = "Day Two";
 
 	@Test
 	public void createGameSuccessfully() {
@@ -245,7 +245,7 @@ public class SchedulerTest {
 		day.setGames(games);
 		service.createDay(day);
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("Game Report for Basketball\n");
 		sb.append("No. of Players: 5\n\n");
 		sb.append("Players playing in this game\n");
@@ -289,7 +289,7 @@ public class SchedulerTest {
 		
 		service.createDay(day);
 		
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("Player Report for Tom\n\n");
 		sb.append("Games player is playing in:\n");
 		sb.append("Basketball\n");
@@ -331,7 +331,7 @@ public class SchedulerTest {
 		day.setGames(games);
 		service.createDay(day);
 		
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("Day Report for Day One\n\n");
 		sb.append("Games played on this day\n");
 		sb.append("Basketball\n");
