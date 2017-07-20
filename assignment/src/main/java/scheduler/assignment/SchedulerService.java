@@ -73,7 +73,7 @@ public class SchedulerService implements ISchedulerService {
 
 	public StringBuffer gameWiseReport(String gameName) { //method to generate game wise report
 		StringBuffer sb = new StringBuffer();
-		if (gameName.equals("")) { //check if game name is empty
+		if ("".equals(gameName)) { //check if game name is empty
 			return sb.append("Error: Game name should not be empty");
 		} else {
 			Game game = gameRepo.findOne(gameName); //get game from repository using game name
@@ -125,7 +125,7 @@ public class SchedulerService implements ISchedulerService {
 	public StringBuffer playerWiseReport(String playerName) { //method to generate player wise report
 		StringBuffer sb = new StringBuffer();
 		//comment
-		if (playerName.equals("")) { //check if player name is empty
+		if ("".equals(playerName)) { //check if player name is empty
 			return sb.append("Error: Player name should not be empty");
 		} else {
 			Player player = playerRepo.findOne(playerName); //get player from repository using player name
@@ -160,7 +160,7 @@ public class SchedulerService implements ISchedulerService {
 
 	public StringBuffer dayWiseReport(String dayName) { //method to generate day wise report
 		StringBuffer sb = new StringBuffer();
-		if (dayName.equals("")) { //check if day name is empty
+		if ("".equals(dayName)) { //check if day name is empty
 			return sb.append("Error: Day name should not be empty");
 		} else {
 			Day day = dayRepo.findOne(dayName); //get day from repository using day name
