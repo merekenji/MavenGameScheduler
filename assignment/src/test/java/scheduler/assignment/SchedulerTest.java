@@ -14,7 +14,6 @@ public class SchedulerTest {
 	private static final String BASKETBALL = "Basketball";
 	private static final String GOLF = "Golf";
 	private static final String FOOTBALL = "Football";
-	private static final String BADMINTON = "Badminton";
 	
 	private static final String TOM = "Tom";
 	private static final String JERRY = "Jerry";
