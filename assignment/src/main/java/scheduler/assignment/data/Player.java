@@ -2,20 +2,20 @@ package scheduler.assignment.data;
 
 public class Player { //data class for Player
 
-	private String name; //name of player
+	private String playerName; //name of player
 	private Game[] games; //games the player is playing in
 	
 	public Player() { //default constructor
-		name = "";
+		playerName = "";
 		games = null;
 	}
 	
 	public String getName() { //getter method for name
-		return name;
+		return playerName;
 	}
 
 	public void setName(String name) { //setter method for name
-		this.name = name;
+		this.playerName = name;
 	}
 
 	public Game[] getGames() { //getter method for games

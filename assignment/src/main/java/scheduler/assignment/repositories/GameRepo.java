@@ -18,20 +18,21 @@ public class GameRepo implements IGameRepo { //implementation class for Game Rep
 	public String save(Game g) { //method to save game into repository
 		if(g == null) { //if Game is null
 			return "Error: The Game object is null";
-		} else if("".equals(g.getName()) || g.getName() == null) { //if game name is empty
-			return "Error: The Game name should not be empty";
-		} else if(g.getNoOfPlayers() <= 0) { //if number of players is less or equal to 0
-			return "Error: There should at least be 1 player playing in the game";
-		} else {
-			if(checkExist(g)) { //check if Game has already exist
-				return "Error: Game has already exist";
-			}
-			if(checkFilled()) { //check if array is filled (no null Game)
-				addSpace(); //call addSpace method to increase length of the array
-			}
-			addGame(g); //call addGame method to add Game into repository
-			return "Success: Game has been saved successfully";
 		}
+		if("".equals(g.getName()) || g.getName() == null) { //if game name is empty
+			return "Error: The Game name should not be empty";
+		}
+		if(g.getNoOfPlayers() <= 0) { //if number of players is less or equal to 0
+			return "Error: There should at least be 1 player playing in the game";
+		}
+		if(checkExist(g)) { //check if Game has already exist
+			return "Error: Game has already exist";
+		}
+		if(checkFilled()) { //check if array is filled (no null Game)
+			addSpace(); //call addSpace method to increase length of the array
+		}
+		addGame(g); //call addGame method to add Game into repository
+		return "Success: Game has been saved successfully";
 	}
 	
 	public boolean checkExist(Game g) { //method to check if Game exist in repository

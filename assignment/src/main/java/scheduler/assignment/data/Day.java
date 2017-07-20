@@ -2,20 +2,20 @@ package scheduler.assignment.data;
 
 public class Day { //data class for Day
 
-	private String name; //name of the Day
+	private String dayName; //name of the Day
 	private Game[] games; //games that are scheduled on this Day
 	
 	public Day() { //default constructor
-		name = "";
+		dayName = "";
 		games = null;
 	}
 
 	public String getName() { //getter method for name
-		return name;
+		return dayName;
 	}
 
 	public void setName(String name) { //setter method for name
-		this.name = name;
+		this.dayName = name;
 	}
 
 	public Game[] getGames() { //getter method for games
