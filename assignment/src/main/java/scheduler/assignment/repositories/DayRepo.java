@@ -16,7 +16,7 @@ public class DayRepo implements IDayRepo { //implementation class for Day Reposi
 	}
 	
 	public String save(Day d) { //method to save day into repository
-		if(d.getName().equals("") || d.getName() == null) { //check if name is blank
+		if("".equals(d.getName()) || d.getName() == null) { //check if name is blank
 			return "Error: The Day name should not be empty";
 		} else {
 			if(checkExist(d)) { //check if Day already exist

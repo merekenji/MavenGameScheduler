@@ -16,7 +16,7 @@ public class PlayerRepo implements IPlayerRepo { //implementation class for Play
 	}
 
 	public String save(Player p) { //method to save player into repository
-		if (p.getName().equals("") || p.getName() == null) { //if player name is empty
+		if ("".equals(p.getName()) || p.getName() == null) { //if player name is empty
 			return "Error: The Player name should not be empty";
 		} else {
 			if (checkExist(p)) { //check if Player has already exist
