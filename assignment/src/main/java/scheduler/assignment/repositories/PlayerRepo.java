@@ -7,7 +7,7 @@ public class PlayerRepo implements IPlayerRepo { //implementation class for Play
 
 	private Player[] players; //array to store Player data
 
-	public PlayerRepo() { //default constructor
+	public PlayerRepo() { //no argument constructor
 		players = new Player[5];
 	}
 

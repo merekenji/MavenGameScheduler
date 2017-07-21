@@ -7,7 +7,7 @@ public class GameRepo implements IGameRepo { //implementation class for Game Rep
 	
 	private Game[] games; //array to store Game data
 	
-	public GameRepo() { //default constructor
+	public GameRepo() { //no argument constructor
 		games = new Game[5];
 	}
 	

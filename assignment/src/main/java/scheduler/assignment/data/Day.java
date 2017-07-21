@@ -5,7 +5,7 @@ public class Day { //data class for Day
 	private String dayName; //name of the Day
 	private Game[] games; //games that are scheduled on this Day
 	
-	public Day() { //default constructor
+	public Day() { //no argument constructor
 		dayName = "";
 		games = null;
 	}

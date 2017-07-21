@@ -17,7 +17,7 @@ public class SchedulerService implements ISchedulerService {
 	private IPlayerRepo playerRepo; // Player Repository object to store data of Players
 	private IDayRepo dayRepo; // Day Repository object to store data of Days
 
-	public SchedulerService() { // default constructor
+	public SchedulerService() { // no argument constructor
 		gameRepo = new GameRepo();
 		playerRepo = new PlayerRepo();
 		dayRepo = new DayRepo();

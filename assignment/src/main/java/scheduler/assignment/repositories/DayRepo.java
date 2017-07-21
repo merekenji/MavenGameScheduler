@@ -7,7 +7,7 @@ public class DayRepo implements IDayRepo { //implementation class for Day Reposi
 
 	private Day[] days; //array to store Day data
 	
-	public DayRepo() { //default constructor
+	public DayRepo() { //no argument constructor
 		days = new Day[5];
 	}
 	

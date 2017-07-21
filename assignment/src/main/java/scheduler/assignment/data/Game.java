@@ -5,7 +5,7 @@ public class Game { //data class for Game
 	private String gameName; //name of Game
 	private int noOfPlayers; //number of players to play this game
 	
-	public Game() { //default constructor
+	public Game() { //no argument constructor
 		gameName = "";
 		noOfPlayers = 0;
 	}
